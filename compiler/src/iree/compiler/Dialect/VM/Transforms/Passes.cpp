@@ -92,7 +92,7 @@ void buildVMTransformPassPipeline(OpPassManager &passManager,
 
   // Combine the initializers for all globals to allow us to optimize them
   // together.
-  passManager.addPass(IREE::Util::createCombineInitializersPass());
+  // passManager.addPass(IREE::Util::createCombineInitializersPass());
 
   FunctionLikeNest(passManager)
       .addPass(mlir::createSCFForLoopCanonicalizationPass);
