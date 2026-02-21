@@ -354,7 +354,6 @@ static iree_status_t iree_vm_native_module_issue_call(
     iree_vm_native_module_t* module, iree_vm_stack_t* stack,
     iree_vm_stack_frame_t* callee_frame, iree_vm_native_function_flags_t flags,
     iree_byte_span_t args_storage, iree_byte_span_t rets_storage) {
-  printf("iree_vm_native_module_issue_call\n");
   iree_vm_module_state_t* module_state = callee_frame->module_state;
 
   // Call the target function using the shim.
