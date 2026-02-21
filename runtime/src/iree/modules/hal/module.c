@@ -1685,7 +1685,6 @@ IREE_VM_ABI_EXPORT(iree_hal_module_fence_create,  //
 IREE_VM_ABI_EXPORT(iree_hal_module_fence_join,  //
                    iree_hal_module_state_t,     //
                    ICrD, r) {
-  printf("iree_hal_module_fence_join\n");
   // NOTE: this is an inlined version of iree_hal_fence_join that avoids the
   // need for mapping VM types to HAL types via temporary stack/heap storage.
   // This lets us avoid allocations/stack exhaustion in pathological cases of
@@ -1693,16 +1692,13 @@ IREE_VM_ABI_EXPORT(iree_hal_module_fence_join,  //
   // hundreds/thousands of inputs).
 
   uint64_t fence_flags = args->i0;
-  printf("fence_flags=%lu\n", fence_flags);
   (void)fence_flags;
 
   // Find the maximum required timepoint capacity by scanning the fence list.
   // This ensures all fences passed in are actually fences _or_ are NULL so
   // the subsequent scan below only needs to check for NULL cases.
-  printf("args->a1_count=%lu\n", args->a1_count);
   iree_host_size_t total_timepoint_capacity = 0;
   for (iree_host_size_t i = 0; i < args->a1_count; ++i) {
-    printf("args->a1[i].r0.type=%lu\n", args->a1[i].r0.type);
     iree_hal_fence_t* fence = NULL;
     IREE_RETURN_IF_ERROR(
         iree_hal_fence_check_deref_or_null(args->a1[i].r0, &fence));
